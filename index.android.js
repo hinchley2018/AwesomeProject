@@ -33,7 +33,7 @@ export default class AwesomeProject extends Component {
         return this.renderLoadingView();
     }
 
-    var movie = MOCKED_MOVIES_DATA[0];
+    var movie = this.state.movies[0];
     return this.renderMovie(movie);
   }
 
