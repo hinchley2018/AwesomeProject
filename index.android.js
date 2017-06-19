@@ -25,7 +25,6 @@ export default class AwesomeProject extends Component {
 
   constructor(props){
     super(props);
-    //dataSource is best to go directly into ListView
     this.state={
       dataSource: new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2,
@@ -35,21 +34,16 @@ export default class AwesomeProject extends Component {
   }
 
   render() {
-    if(!this.state.movies){
+    if(!this.state.loaded){
         return this.renderLoadingView();
     }
 
     return (
         <ListView
             dataSource={this.state.dataSource}
-            renderRow={this.renderMovie()}
+            renderRow={this.renderMovie}
             style={styles.listView}
-            initialListSize=""
-            onEndReachedThreshold=""
-            pageSize=""
-            renderScrollComponent=""
-            scrollRenderAheadDistance=""
-            stickyHeaderIndices=""
+
         />
     );
   }
@@ -88,16 +82,9 @@ export default class AwesomeProject extends Component {
                     style={styles.thumbnail}
                 />
                 <View style={styles.rightContainer}>
-                    <Text style={styles.title}>
-                        {movie.title}
-                    </Text>
-                    <Text style={styles.year}>
-                        {movie.year}
-                    </Text>
-
+                    <Text style={styles.title}> {movie.title} </Text>
+                    <Text style={styles.year}> {movie.year} </Text>
                 </View>
-
-
             </View>
         );
     }
@@ -115,6 +102,10 @@ const styles = StyleSheet.create({
   rightContainer: {
       flex: 1,
   },
+    listView:{
+      paddingTop: 20,
+        backgroundColor: '#F5FCFF',
+    },
 
   title: {
     fontSize:20,
@@ -123,8 +114,6 @@ const styles = StyleSheet.create({
   },
   year: {
       textAlign: 'center',
-
-
   },
   thumbnail: {
     width: 80,
