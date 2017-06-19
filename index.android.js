@@ -6,11 +6,13 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  Image,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    Image,
+    StyleSheet,
+    Text,
+    View,
+    ListView,
+
 } from 'react-native';
 
 var MOCKED_MOVIES_DATA = [
@@ -33,8 +35,19 @@ export default class AwesomeProject extends Component {
         return this.renderLoadingView();
     }
 
-    var movie = this.state.movies[0];
-    return this.renderMovie(movie);
+    return (
+        <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderMovie()}
+            style={styles.listView}
+            initialListSize=""
+            onEndReachedThreshold=""
+            pageSize=""
+            renderScrollComponent=""
+            scrollRenderAheadDistance=""
+            stickyHeaderIndices=""
+        />
+    );
   }
 
   componentDidMount(){
