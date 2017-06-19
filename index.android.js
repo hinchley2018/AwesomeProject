@@ -29,26 +29,12 @@ export default class AwesomeProject extends Component {
   }
 
   render() {
+    if(!this.state.movies){
+        return this.renderLoadingView();
+    }
+
     var movie = MOCKED_MOVIES_DATA[0];
-    return (
-      <View style={styles.container}>
-        <Image
-            source={{uri: movie.posters.thumbnail}}
-            style={styles.thumbnail}
-        />
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>
-              {movie.title}
-          </Text>
-          <Text style={styles.year}>
-              {movie.year}
-          </Text>
-
-        </View>
-
-
-      </View>
-    );
+    return this.renderMovie(movie);
   }
 
   componentDidMount(){
@@ -64,6 +50,38 @@ export default class AwesomeProject extends Component {
               });
             })
             .done();
+    }
+
+    renderLoadingView() {
+        return (
+            <View style={styles.container}>
+                <Text>
+                    Loading movies...
+                </Text>
+            </View>
+        );
+    }
+
+    renderMovie(movie) {
+        return (
+            <View style={styles.container}>
+                <Image
+                    source={{uri: movie.posters.thumbnail}}
+                    style={styles.thumbnail}
+                />
+                <View style={styles.rightContainer}>
+                    <Text style={styles.title}>
+                        {movie.title}
+                    </Text>
+                    <Text style={styles.year}>
+                        {movie.year}
+                    </Text>
+
+                </View>
+
+
+            </View>
+        );
     }
 }
 
