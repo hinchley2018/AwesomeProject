@@ -25,6 +25,7 @@ export default class AwesomeProject extends Component {
 
   constructor(props){
     super(props);
+    //dataSource is best to go directly into ListView
     this.state={
       dataSource: new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2,
@@ -62,7 +63,8 @@ export default class AwesomeProject extends Component {
             .then((response) => response.json())
             .then((responseData) => {
               this.setState({
-                  movies: responseData.movies,
+                  dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+                  loaded: true,
               });
             })
             .done();
